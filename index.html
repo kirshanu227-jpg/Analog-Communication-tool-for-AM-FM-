@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analog Communication Signal Visualizer — AM &amp; FM Modulation Lab</title>
+  <meta name="description" content="Interactive virtual laboratory for Analog Communication — visualize message signals, carrier signals, AM and FM modulation in real time. Designed for B.Tech ECE students." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ───── SIDEBAR ───── -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon">
+        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="2.5"/><path d="M8 20 Q14 8, 20 20 Q26 32, 32 20" stroke="var(--accent)" stroke-width="2" fill="none"/><circle cx="20" cy="20" r="3" fill="var(--accent)"/></svg>
+      </div>
+      <span class="logo-text">AM / FM Lab</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active" data-target="sec-message" id="nav-message">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12 Q6 4,12 12 Q18 20,22 12"/></svg>
+        <span>Message Signal</span>
+      </button>
+      <button class="nav-btn" data-target="sec-carrier" id="nav-carrier">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12 Q5 6,8 12 Q11 18,14 12 Q17 6,20 12 Q22 16,22 12"/></svg>
+        <span>Carrier Signal</span>
+      </button>
+      <button class="nav-btn" data-target="sec-am" id="nav-am">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M6 12 Q9 6,12 12 Q15 18,18 12"/></svg>
+        <span>AM Modulation</span>
+      </button>
+      <button class="nav-btn" data-target="sec-fm" id="nav-fm">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12 Q4 4,6 12 Q8 20,10 12 Q11.5 4,13 12 Q15 20,17 12 Q19.5 4,22 12"/></svg>
+        <span>FM Modulation</span>
+      </button>
+      <button class="nav-btn" data-target="sec-theory" id="nav-theory">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span>Theory</span>
+      </button>
+      <button class="nav-btn" data-target="sec-calc" id="nav-calc">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>
+        <span>Calculations</span>
+      </button>
+      <button class="nav-btn" data-target="sec-presets" id="nav-presets">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Presets</span>
+      </button>
+      <button class="nav-btn" data-target="sec-lab" id="nav-lab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3h6v7l5 8H4l5-8V3z"/><line x1="8" y1="3" x2="16" y2="3"/></svg>
+        <span>Virtual Lab</span>
+      </button>
+    </nav>
+    <div class="sidebar-footer"><span class="version-tag">v2.0 · ECE Lab</span></div>
+  </aside>
+
+  <!-- ───── MOBILE TOP BAR ───── -->
+  <header id="mobile-topbar" class="mobile-topbar">
+    <button id="menu-toggle" class="menu-toggle" aria-label="Toggle sidebar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <span class="mobile-title">AM / FM Modulation Lab</span>
+  </header>
+
+  <!-- ───── MAIN ───── -->
+  <main id="main-content" class="main-content">
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+      <div class="header-text">
+        <h1>Analog Communication Signal Visualizer</h1>
+        <p class="subtitle">Interactive AM &amp; FM Modulation Laboratory for Engineering Students</p>
+        <div class="header-actions" style="margin-top: 12px; display: flex; gap: 10px;">
+          <button id="btn-download-graphs" class="wave-btn active" style="flex: none; min-width: auto; padding: 6px 14px; flex-direction: row; align-items: center; gap: 6px; font-size: 0.8rem; border-radius: 8px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Download Reports</span>
+          </button>
+          <button id="btn-clear-graphs" class="wave-btn" style="flex: none; min-width: auto; padding: 6px 14px; flex-direction: row; align-items: center; gap: 6px; font-size: 0.8rem; border-radius: 8px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 14px; height: 14px;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            <span>Reset Graphs</span>
+          </button>
+        </div>
+      </div>
+      <div class="header-stats">
+        <div class="stat-chip"><span class="stat-label">AM μ</span><span class="stat-value" id="header-mu">0.33</span></div>
+        <div class="stat-chip"><span class="stat-label">FM β</span><span class="stat-value" id="header-beta">—</span></div>
+        <div class="stat-chip"><span class="stat-label">AM Power</span><span class="stat-value" id="header-power">—</span></div>
+        <div class="stat-chip"><span class="stat-label">AM BW</span><span class="stat-value" id="header-bw">—</span></div>
+        <div class="stat-chip"><span class="stat-label">FM BW</span><span class="stat-value" id="header-fmbw">—</span></div>
+      </div>
+    </section>
+
+    <!-- ════════════ 1 · MESSAGE SIGNAL ════════════ -->
+    <section id="sec-message" class="section-block">
+      <div class="section-title-row">
+        <h2>Message Signal Generator</h2>
+        <span class="badge badge-blue">m(t)</span>
+      </div>
+      <div class="split-layout">
+        <div class="controls-side">
+          <!-- Wave picker -->
+          <div class="control-card">
+            <label class="control-label">Waveform Type</label>
+            <div class="wave-picker" id="wave-picker">
+              <button class="wave-btn active" data-wave="sine" id="btn-sine">
+                <svg viewBox="0 0 48 24"><path d="M0 12 Q12 0,24 12 Q36 24,48 12" stroke="currentColor" fill="none" stroke-width="2"/></svg><span>Sine</span>
+              </button>
+              <button class="wave-btn" data-wave="square" id="btn-square">
+                <svg viewBox="0 0 48 24"><path d="M0 18 H12 V6 H24 V18 H36 V6 H48" stroke="currentColor" fill="none" stroke-width="2"/></svg><span>Square</span>
+              </button>
+              <button class="wave-btn" data-wave="triangle" id="btn-triangle">
+                <svg viewBox="0 0 48 24"><path d="M0 18 L12 6 L24 18 L36 6 L48 18" stroke="currentColor" fill="none" stroke-width="2"/></svg><span>Triangle</span>
+              </button>
+            </div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="msg-amp">Amplitude (A<sub>m</sub>)</label>
+            <input type="range" id="msg-amp" min="0.1" max="5" step="0.1" value="1" class="slider" />
+            <div class="slider-info"><span class="slider-val" id="msg-amp-val">1.0</span><span class="slider-unit">V</span></div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="msg-freq">Frequency (f<sub>m</sub>)</label>
+            <input type="range" id="msg-freq" min="1" max="50" step="1" value="5" class="slider" />
+            <div class="slider-info"><span class="slider-val" id="msg-freq-val">5</span><span class="slider-unit">Hz</span></div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="msg-phase">Phase (φ<sub>m</sub>)</label>
+            <input type="range" id="msg-phase" min="0" max="360" step="1" value="0" class="slider" />
+            <div class="slider-info"><span class="slider-val" id="msg-phase-val">0</span><span class="slider-unit">°</span></div>
+          </div>
+          <div class="equation-box">
+            <span class="eq-label">m(t) =</span>
+            <span class="eq-body" id="msg-eq-body">1.0 sin(2π·5t + 0°)</span>
+          </div>
+        </div>
+        <div class="graph-side">
+          <div class="graph-card"><div class="graph-card-header"><span class="graph-tag tag-blue">Message Signal m(t)</span></div><div class="plot-container" id="plot-message"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ 2 · CARRIER SIGNAL ════════════ -->
+    <section id="sec-carrier" class="section-block">
+      <div class="section-title-row">
+        <h2>Carrier Signal Generator</h2>
+        <span class="badge badge-purple">c(t)</span>
+      </div>
+      <div class="split-layout">
+        <div class="controls-side">
+          <div class="control-card">
+            <label class="control-label" for="car-amp">Carrier Amplitude (A<sub>c</sub>)</label>
+            <input type="range" id="car-amp" min="0.5" max="10" step="0.1" value="3" class="slider slider-purple" />
+            <div class="slider-info"><span class="slider-val" id="car-amp-val">3.0</span><span class="slider-unit">V</span></div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="car-freq">Carrier Frequency (f<sub>c</sub>)</label>
+            <input type="range" id="car-freq" min="20" max="500" step="1" value="100" class="slider slider-purple" />
+            <div class="slider-info"><span class="slider-val" id="car-freq-val">100</span><span class="slider-unit">Hz</span></div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="car-phase">Carrier Phase (φ<sub>c</sub>)</label>
+            <input type="range" id="car-phase" min="0" max="360" step="1" value="0" class="slider slider-purple" />
+            <div class="slider-info"><span class="slider-val" id="car-phase-val">0</span><span class="slider-unit">°</span></div>
+          </div>
+          <div class="equation-box equation-purple">
+            <span class="eq-label">c(t) =</span>
+            <span class="eq-body" id="car-eq-body">3.0 cos(2π·100t + 0°)</span>
+          </div>
+        </div>
+        <div class="graph-side">
+          <div class="graph-card"><div class="graph-card-header"><span class="graph-tag tag-purple">Carrier Signal c(t)</span></div><div class="plot-container" id="plot-carrier"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ 3 · AM MODULATION ════════════ -->
+    <section id="sec-am" class="section-block">
+      <div class="section-title-row">
+        <h2>Amplitude Modulation (AM)</h2>
+        <span class="badge badge-green">AM</span>
+      </div>
+      <div class="split-layout">
+        <div class="controls-side">
+          <div class="am-formula-card">
+            <div class="formula-row"><span class="formula-label">AM Signal:</span><span class="formula-math">s(t) = A<sub>c</sub>[1 + μ·m(t)] cos(2πf<sub>c</sub>t)</span></div>
+            <div class="formula-row"><span class="formula-label">Mod Index:</span><span class="formula-math" id="am-mu-display">μ = A<sub>m</sub>/A<sub>c</sub> = 0.33</span></div>
+          </div>
+          <div class="modulation-status" id="mod-status">
+            <div class="status-dot status-normal"></div>
+            <span id="mod-status-text">Normal Modulation (μ &lt; 1)</span>
+          </div>
+          <div class="graph-card compact-graph"><div class="graph-card-header"><span class="graph-tag tag-amber">AM Frequency Spectrum</span></div><div class="plot-container plot-sm" id="plot-am-spectrum"></div></div>
+        </div>
+        <div class="graph-side">
+          <div class="graph-card"><div class="graph-card-header"><span class="graph-tag tag-green">AM Modulated Signal s(t)</span></div><div class="plot-container" id="plot-am"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ 4 · FM MODULATION ════════════ -->
+    <section id="sec-fm" class="section-block">
+      <div class="section-title-row">
+        <h2>Frequency Modulation (FM)</h2>
+        <span class="badge badge-cyan">FM</span>
+      </div>
+      <div class="split-layout">
+        <div class="controls-side">
+          <div class="am-formula-card fm-formula-card">
+            <div class="formula-row"><span class="formula-label">FM Signal:</span><span class="formula-math fm-color">s<sub>FM</sub>(t) = A<sub>c</sub> cos(2πf<sub>c</sub>t + β sin(2πf<sub>m</sub>t))</span></div>
+            <div class="formula-row"><span class="formula-label">Mod Index:</span><span class="formula-math fm-color" id="fm-beta-display">β = Δf / f<sub>m</sub> = 10.0</span></div>
+            <div class="formula-row"><span class="formula-label">Carson's Rule:</span><span class="formula-math fm-color" id="fm-bw-display">BW = 2(Δf + f<sub>m</sub>) = 110 Hz</span></div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="fm-dev">Frequency Deviation (Δf)</label>
+            <input type="range" id="fm-dev" min="1" max="200" step="1" value="50" class="slider slider-cyan" />
+            <div class="slider-info"><span class="slider-val" id="fm-dev-val">50</span><span class="slider-unit">Hz</span></div>
+          </div>
+          <div class="modulation-status" id="fm-status">
+            <div class="status-dot status-normal"></div>
+            <span id="fm-status-text">Narrowband FM (β &lt; 1)</span>
+          </div>
+          <div class="graph-card compact-graph"><div class="graph-card-header"><span class="graph-tag tag-cyan">FM Frequency Spectrum</span></div><div class="plot-container plot-sm" id="plot-fm-spectrum"></div></div>
+        </div>
+        <div class="graph-side">
+          <div class="graph-card"><div class="graph-card-header"><span class="graph-tag tag-cyan">FM Modulated Signal s<sub>FM</sub>(t)</span></div><div class="plot-container" id="plot-fm"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════ 5 · THEORY ════════════ -->
+    <section id="sec-theory" class="section-block">
+      <div class="section-title-row"><h2>Communication Theory</h2><span class="badge badge-amber">Reference</span></div>
+      <div class="theory-grid" id="theory-grid"></div>
+    </section>
+
+    <!-- ════════════ 6 · CALCULATIONS ════════════ -->
+    <section id="sec-calc" class="section-block">
+      <div class="section-title-row"><h2>Automatic Calculations</h2><span class="badge badge-green">Live</span></div>
+      <div class="calc-grid" id="calc-grid"></div>
+    </section>
+
+    <!-- ════════════ 7 · PRESETS ════════════ -->
+    <section id="sec-presets" class="section-block">
+      <div class="section-title-row"><h2>Experiment Presets</h2><span class="badge badge-blue">Quick Start</span></div>
+      <p class="panel-desc">Click a preset to instantly configure all parameters for the experiment.</p>
+      <div class="presets-grid" id="presets-grid"></div>
+    </section>
+
+    <!-- ════════════ 8 · VIRTUAL LAB ════════════ -->
+    <section id="sec-lab" class="section-block">
+      <div class="section-title-row"><h2>Observe &amp; Learn — Virtual Lab</h2><span class="badge badge-purple">Interactive</span></div>
+      <p class="panel-desc">Change parameters below and read auto-generated observations about the waveform behaviour.</p>
+      <div class="split-layout">
+        <div class="controls-side">
+          <div class="control-card">
+            <label class="control-label" for="lab-mu">AM Modulation Index (μ)</label>
+            <input type="range" id="lab-mu" min="0" max="3" step="0.01" value="0.5" class="slider" />
+            <div class="slider-info"><span class="slider-val" id="lab-mu-val">0.50</span></div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="lab-beta">FM Modulation Index (β)</label>
+            <input type="range" id="lab-beta" min="0" max="20" step="0.1" value="5" class="slider slider-cyan" />
+            <div class="slider-info"><span class="slider-val" id="lab-beta-val">5.0</span></div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="lab-fm">Message Freq (f<sub>m</sub>)</label>
+            <input type="range" id="lab-fm" min="1" max="50" step="1" value="5" class="slider" />
+            <div class="slider-info"><span class="slider-val" id="lab-fm-val">5</span><span class="slider-unit">Hz</span></div>
+          </div>
+          <div class="control-card">
+            <label class="control-label" for="lab-fc">Carrier Freq (f<sub>c</sub>)</label>
+            <input type="range" id="lab-fc" min="20" max="500" step="1" value="100" class="slider slider-purple" />
+            <div class="slider-info"><span class="slider-val" id="lab-fc-val">100</span><span class="slider-unit">Hz</span></div>
+          </div>
+          <div class="observations-card" id="observations-card">
+            <h3>📝 Auto-Generated Observations</h3>
+            <ul id="observations-list"><li>Adjust the sliders above to generate observations.</li></ul>
+          </div>
+        </div>
+        <div class="graph-side">
+          <div class="graph-card" style="margin-bottom:14px"><div class="graph-card-header"><span class="graph-tag tag-green">Lab — AM Signal</span></div><div class="plot-container plot-sm" id="lab-am-graph"></div></div>
+          <div class="graph-card"><div class="graph-card-header"><span class="graph-tag tag-cyan">Lab — FM Signal</span></div><div class="plot-container plot-sm" id="lab-fm-graph"></div></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+  <script src="app.js"></script>
+</body>
+</html>
